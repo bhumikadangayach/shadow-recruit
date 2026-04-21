@@ -1,7 +1,10 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL ?? 'http://localhost:8000/api/v1',
+  // This ensures that even if you forget /api/v1 in Vercel settings, it still works
+  baseURL: import.meta.env.VITE_API_URL 
+    ? `${import.meta.env.VITE_API_URL}/api/v1` 
+    : 'http://localhost:8000/api/v1',
   headers: { 'Content-Type': 'application/json' },
 })
 
