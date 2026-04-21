@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+sqlalchemy
+aiosqlite
+pydantic
+python-multipart
+python-jose[cryptography]
+passlib[bcrypt]
+langchain
+langchain-openai
+langchain-community
+structlog
+chromadb
