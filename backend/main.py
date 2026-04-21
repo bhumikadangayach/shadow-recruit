@@ -80,7 +80,7 @@ async def global_exception_handler(request: Request, exc: Exception):
 
 # ─── Routers ─────────────────────────────────────────────────────────────────
 
-API_PREFIX = "/api/v1"
+API_PREFIX = ""
 
 app.include_router(auth.router, prefix=API_PREFIX)
 app.include_router(sessions.router, prefix=API_PREFIX)
