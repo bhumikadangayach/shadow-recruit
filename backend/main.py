@@ -23,19 +23,15 @@ log = structlog.get_logger()
 async def lifespan(app: FastAPI):
     log.info("Starting Shadow Recruit API", env=settings.app_env)
 
-    # Create upload directory
     Path(settings.upload_dir).mkdir(parents=True, exist_ok=True)
     Path(settings.chroma_persist_dir).mkdir(parents=True, exist_ok=True)
 
-    # Create DB tables (use Alembic in production)
-    if settings.app_env == "development":
-        await create_tables()
-        log.info("Database tables created")
+    await create_tables()
+    log.info("Database tables created")
 
     yield
 
     log.info("Shutting down Shadow Recruit API")
-
 
 # ─── App ──────────────────────────────────────────────────────────────────────
 
@@ -80,13 +76,13 @@ async def global_exception_handler(request: Request, exc: Exception):
 
 # ─── Routers ─────────────────────────────────────────────────────────────────
 
-API_PREFIX = ""
+API_PREFIX = "/api/v1"
 
-app.include_router(auth.router) # No prefix here!
-app.include_router(sessions.router)
-app.include_router(job_descriptions.router)
-app.include_router(resumes.router)
-app.include_router(interview.router)
+app.include_router(auth.router, prefix=API_PREFIX)
+app.include_router(sessions.router, prefix=API_PREFIX)
+app.include_router(job_descriptions.router, prefix=API_PREFIX)
+app.include_router(resumes.router, prefix=API_PREFIX)
+app.include_router(interview.router, prefix=API_PREFIX)
 
 
 # ─── Health ───────────────────────────────────────────────────────────────────
