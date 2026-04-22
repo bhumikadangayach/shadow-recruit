@@ -7,6 +7,14 @@ class Settings(BaseSettings):
     debug: bool = True
     api_prefix: str = "/api/v1"
     
+    vite_api_url: str = ""
+    vite_ws_url: str = ""
+
+    class Config:
+        env_file = ".env"
+        # Optional: Add this to ignore extra variables instead of crashing
+        extra = "ignore"
+        
     # Security
     secret_key: str = "your-super-secret-key-change-this"
     access_token_expire_minutes: int = 60 * 24 * 7  # 7 days
