@@ -76,13 +76,13 @@ async def global_exception_handler(request: Request, exc: Exception):
 
 # ─── Routers ─────────────────────────────────────────────────────────────────
 
-API_PREFIX = ""
+API_PREFIX = "/api/v1"
 
-app.include_router(auth.router)
-app.include_router(sessions.router)
-app.include_router(job_descriptions.router)
-app.include_router(resumes.router)
-app.include_router(interview.router)
+app.include_router(auth.router, prefix=API_PREFIX)
+app.include_router(sessions.router, prefix=API_PREFIX)
+app.include_router(job_descriptions.router, prefix=API_PREFIX)
+app.include_router(resumes.router, prefix=API_PREFIX)
+app.include_router(interview.router, prefix=API_PREFIX)
 
 
 # ─── Health ───────────────────────────────────────────────────────────────────
