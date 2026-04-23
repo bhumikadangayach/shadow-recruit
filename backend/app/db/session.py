@@ -1,22 +1,17 @@
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
 import os
 
 # Get DATABASE_URL from environment
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-# ✅ Fix for Render PostgreSQL URLs
-# Render provides postgres:// but SQLAlchemy async needs postgresql+asyncpg://
+# Fix for Render PostgreSQL URLs
 if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql+asyncpg://", 1)
-elif DATABASE_URL and not DATABASE_URL.startswith("postgresql+asyncpg://"):
-    # If it doesn't have asyncpg, add it
-    DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://", 1)
 
 engine = create_async_engine(
     DATABASE_URL,
-    echo=True,  # Set to False in production
+    echo=True if os.getenv("DEBUG") == "True" else False,
     future=True
 )
 
@@ -28,8 +23,18 @@ AsyncSessionLocal = sessionmaker(
     autoflush=False,
 )
 
-Base = declarative_base()
 
+# ✅ Create tables function
+async def create_tables():
+    """Create all database tables"""
+    # Import Base from models to ensure all models are registered
+    from app.models.models import Base
+    
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+
+
+# Dependency for FastAPI routes
 async def get_db():
     async with AsyncSessionLocal() as session:
         try:
