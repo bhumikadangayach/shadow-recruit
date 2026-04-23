@@ -49,9 +49,12 @@ app = FastAPI(
 
 
 # ✅ Add CORS BEFORE routers
+# ─── Middleware ───────────────────────────────────────────────────────────────
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        "https://shadow-recruit-git-main-bhumikas-projects-e3ba6657.vercel.app",
         "https://shadow-recruit-pclrhf1ps-bhumikas-projects-e3ba6657.vercel.app",
         "http://localhost:3000",
         "http://localhost:5173",
