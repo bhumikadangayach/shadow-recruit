@@ -45,15 +45,19 @@ app = FastAPI(
 )
 
 # ─── Middleware ───────────────────────────────────────────────────────────────
+# ✅ Correct origin (your frontend)
+origins = [
+    "https://shadow-recruit.vercel.app",
+]
 
+# ✅ Add CORS BEFORE routers
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*",],
-    allow_credentials=True,
+    allow_origins=origins,
+    allow_credentials=True,   # needed for Authorization header
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
