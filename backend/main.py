@@ -51,7 +51,7 @@ app = FastAPI(
 # ✅ Add CORS BEFORE routers
 app.add_middleware(
     CORSMiddleware,
-    allow_origin_regex=r"https://.*\.vercel\.app",
+    allow_origin_regex="https://.*\.vercel\.app",
     allow_credentials=True,   # needed for Authorization header
     allow_methods=["*"],
     allow_headers=["*"],
