@@ -47,7 +47,7 @@ async def upload_resume(
 
     return ResumeOut(id=resume_id, filename=file.filename, user_id=current_user.id)
 
-@router.get("/", response_model=Optional[ResumeOut])
+@router.get("", response_model=Optional[ResumeOut])  # Changed from "/" to ""
 async def get_resume(current_user: User = Depends(get_current_active_user)):
     resume = _resume_store.get(current_user.id)
     if not resume:
