@@ -17,16 +17,16 @@ export default function ResumesPage() {
   const queryClient = useQueryClient()
 
   const { data: resume, isLoading } = useQuery<Resume | null>({
-    queryKey: ['resume'],
-    queryFn: async () => {
-      try {
-        const { data } = await api.get('/resumes/')
-        return data
-      } catch {
-        return null
-      }
-    },
-  })
+  queryKey: ['resume'],
+  queryFn: async () => {
+    try {
+      const { data } = await api.get('/resumes')  // Changed from '/resumes/' to '/resumes'
+      return data
+    } catch {
+      return null
+    }
+  },
+})
 
   const uploadMutation = useMutation({
     mutationFn: async (file: File) => {
@@ -46,15 +46,15 @@ export default function ResumesPage() {
     },
   })
 
-  const deleteMutation = useMutation({
-    mutationFn: async () => {
-      await api.delete('/resumes/')
-    },
-    onSuccess: () => {
-      toast.success('Resume deleted.')
-      queryClient.invalidateQueries({ queryKey: ['resume'] })
-    },
-  })
+ const deleteMutation = useMutation({
+  mutationFn: async () => {
+    await api.delete('/resumes')  // Changed from '/resumes/' to '/resumes'
+  },
+  onSuccess: () => {
+    toast.success('Resume deleted.')
+    queryClient.invalidateQueries({ queryKey: ['resume'] })
+  },
+})
 
   const handleFile = (file: File) => {
     if (!['application/pdf', 'text/plain', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'].includes(file.type)) {
