@@ -107,7 +107,7 @@ async def interview_websocket(session_id: str, websocket: WebSocket):
         # Mark as in_progress on first connection
         if session.status == InterviewStatus.pending:
             session.status = InterviewStatus.in_progress
-            session.started_at = datetime.now(timezone.utc)
+            session.started_at = datetime.utcnow()
             await db.commit()
 
         await websocket.send_json({"type": "connected", "content": "Interview session ready"})
@@ -149,7 +149,7 @@ async def interview_websocket(session_id: str, websocket: WebSocket):
 
                 # ── End interview ─────────────────────────────────────────────
                 elif msg_type == "end":
-                    now = datetime.now(timezone.utc)
+                    now = datetime.utcnow()
                     session.status = InterviewStatus.completed
                     session.completed_at = now
                     if session.started_at:
