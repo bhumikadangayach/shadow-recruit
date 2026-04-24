@@ -54,7 +54,7 @@ async def get_resume(current_user: User = Depends(get_current_active_user)):
         return None
     return ResumeOut(**{k: resume[k] for k in ['id', 'filename', 'user_id']})
 
-@router.delete("/")
+@router.delete("")  # Changed from "/" to ""
 async def delete_resume(current_user: User = Depends(get_current_active_user)):
     resume = _resume_store.pop(current_user.id, None)
     if resume and os.path.exists(resume["path"]):
