@@ -1,6 +1,6 @@
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import JSON, DateTime, Integer, Boolean, String
-from datetime import datetime, timezone
+from datetime import datetime
 import enum
 
 class Base(DeclarativeBase):
@@ -18,7 +18,7 @@ class User(Base):
     email: Mapped[str] = mapped_column(unique=True, index=True)
     hashed_password: Mapped[str] = mapped_column()
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
 class InterviewSession(Base):
     __tablename__ = "sessions"
@@ -32,7 +32,7 @@ class InterviewSession(Base):
     completed_at: Mapped[datetime] = mapped_column(DateTime, nullable=True)
     duration_seconds: Mapped[int] = mapped_column(Integer, nullable=True)
     job_description_id: Mapped[str] = mapped_column(nullable=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
 class InterviewReport(Base):
     __tablename__ = "reports"
@@ -48,4 +48,4 @@ class InterviewReport(Base):
     improvements: Mapped[list] = mapped_column(JSON)
     recommendation: Mapped[str] = mapped_column()
     question_evaluations: Mapped[list] = mapped_column(JSON)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
