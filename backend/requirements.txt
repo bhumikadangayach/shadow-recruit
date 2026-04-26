@@ -17,3 +17,4 @@ google-genai
 argon2-cffi
 langchain-groq
 pypdf
+slack-bolt==1.18.0

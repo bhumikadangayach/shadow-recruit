@@ -1,6 +1,7 @@
 import logging
 from contextlib import asynccontextmanager
 from pathlib import Path
+from slack_handler import handler
 
 import structlog
 from fastapi import FastAPI, Request, status
@@ -107,3 +108,12 @@ async def health():
 @app.get("/", tags=["root"])
 async def root():
     return {"message": f"Welcome to {settings.app_name} API. Visit /docs for documentation."}
+# Slack endpoint
+@app.post("/slack/events")
+async def slack_events(req: Request):
+    return await handler.handle(req)
+
+# Health check (optional but useful)
+@app.get("/slack/health")
+async def slack_health():
+    return {"status": "Slack integration active"}
