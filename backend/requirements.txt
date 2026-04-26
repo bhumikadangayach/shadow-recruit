@@ -17,4 +17,3 @@ google-genai
 argon2-cffi
 langchain-groq
 pypdf
-sentence-transformers
