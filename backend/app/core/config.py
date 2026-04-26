@@ -9,11 +9,6 @@ class Settings(BaseSettings):
     
     vite_api_url: str = ""
     vite_ws_url: str = ""
-
-    class Config:
-        env_file = ".env"
-        # Optional: Add this to ignore extra variables instead of crashing
-        extra = "ignore"
         
     # Security
     secret_key: str = "your-super-secret-key-change-this"
@@ -28,6 +23,10 @@ class Settings(BaseSettings):
     # openai_api_key: str = "your-openai-api-key"
     groq_api_key: str = ""
     
+    # Slack
+    slack_bot_token: str = ""
+    slack_signing_secret: str = ""
+    
     # CORS
     allowed_origins: str = "http://localhost:5173"
 
@@ -41,5 +40,6 @@ class Settings(BaseSettings):
 
     class Config:
         env_file = ".env"
+        extra = "ignore"  # This will ignore extra environment variables
 
 settings = Settings()
