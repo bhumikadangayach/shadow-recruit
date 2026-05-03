@@ -6,15 +6,12 @@ pydantic
 python-multipart
 python-jose[cryptography]
 passlib[bcrypt]
-langchain
-langchain-openai
-langchain-community
 structlog
-chromadb
 asyncpg
 psycopg2-binary
 google-genai
 argon2-cffi
 langchain-groq
 pypdf
+anthropic
 slack-bolt==1.18.0
