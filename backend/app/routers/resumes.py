@@ -34,9 +34,9 @@ async def upload_resume(
     with open(upload_path, "wb") as f:
         shutil.copyfileobj(file.file, f)
 
-    # Index into RAG
-    from app.rag.ingestion import ingest_resume
-    ingest_resume(user_id=current_user.id, file_path=upload_path)
+    # # DISABLED - RAG ingestion removed to reduce memory usage
+    # from app.rag.ingestion import ingest_resume
+    # ingest_resume(user_id=current_user.id, file_path=upload_path)
 
     _resume_store[current_user.id] = {
         "id": resume_id,
