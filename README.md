@@ -2,7 +2,7 @@
 
 > A production-grade AI agent that conducts async, multi-turn mock interviews via Slack — powered by LangChain, RAG, and LLMs.
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-black?style=flat&logo=vercel)](https://shadow-recruit-web.vercel.app)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-black?style=flat&logo=vercel)][(https://shadow-recruit.vercel.app)]
 [![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=flat&logo=langchain&logoColor=white)](https://langchain.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -12,7 +12,7 @@
 
 ## 📸 Demo
 
-> 🔗 **[shadow-recruit-web.vercel.app](https://shadow-recruit-web.vercel.app)**
+> 🔗 **[shadow-recruit-web.vercel.app](https://shadow-recruit.vercel.app)**
 
 ---
 
