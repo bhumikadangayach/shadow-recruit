@@ -55,9 +55,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "*"
-    ],
+    allow_origins=settings.allowed_origins_list,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -111,6 +109,12 @@ async def root():
 # Slack endpoint
 @app.post("/slack/events")
 async def slack_events(req: Request):
+    if handler is None:
+        return JSONResponse(
+            status_code=503,
+            content={"detail": "Slack integration is not configured"}
+        )
+
     return await handler.handle(req)
 
 # Health check (optional but useful)
